@@ -1,7 +1,12 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from app import app
+try:
+    from app import app
+except ImportError as e:
+    print(f"ImportError: {e}")
+    raise
+
 import pytest
 
 @pytest.fixture
