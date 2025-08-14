@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.sublime-*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Virtual Environments
+.env
+.envrc
+
+# Logs
+*.log
+
+# Testing
+.coverage
+coverage.xml
+*.cache
+
+# Docker
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Kubernetes
+*.kube
