@@ -1,7 +1,7 @@
 FROM python:3.8-slim
 
 WORKDIR /app
-COPY src/app /app
+COPY app.py requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000

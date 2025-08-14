@@ -27,12 +27,11 @@ This guide explains how to set up the Web-Application-Automation project locally
 
 3. Install Python dependencies:
    ```bash
-   pip install -r src/app/requirements.txt
+   pip install -r requirements.txt
    ```
 
 4. Run the application locally:
    ```bash
-   cd src/app
    python app.py
    ```
 

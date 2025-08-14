@@ -6,10 +6,9 @@ GitHub: [https://github.com/victordeman/Web-Application-Automation](https://gith
 
 ## Project Structure
 
-- **src/app/**: Core application code (e.g., Flask REST API).
-- **src/scripts/**: Utility scripts for automation tasks.
-- **config/**: Configuration files for the application and tools.
-- **tests/**: Unit and integration tests for the application.
+- **app.py**: Core Flask application code.
+- **requirements.txt**: Python dependencies for the application.
+- **tests/**: Unit and integration tests.
 - **deployment/**:
   - **docker/**: Dockerfile and Docker Compose configurations.
   - **kubernetes/**: Kubernetes manifests for deployment.
@@ -44,15 +43,15 @@ GitHub: [https://github.com/victordeman/Web-Application-Automation](https://gith
    ./setup_web_app_automation.sh
    ```
 
-3. Install dependencies (manually for now):
-   - Install Python dependencies: `pip install -r src/app/requirements.txt`
-   - Install other tools as needed (Docker, Kubernetes, etc.).
+3. Install dependencies (from the root directory):
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Running the Application Locally
 
-1. Start the Flask app:
+1. Start the Flask app (from the root directory):
    ```bash
-   cd src/app
    python app.py
    ```
 
