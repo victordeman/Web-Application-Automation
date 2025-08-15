@@ -5,7 +5,7 @@ metadata:
   labels:
     app: webapp
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: webapp
@@ -17,6 +17,7 @@ spec:
       containers:
       - name: webapp
         image: webapp:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
         resources:

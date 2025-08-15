@@ -1,43 +1,42 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-try:
-    from app import app
-except ImportError as e:
-    print(f"ImportError: {e}")
-    raise
-
 import pytest
+from app import app
 
 @pytest.fixture
 def client():
-    app.testing = True
-    return app.test_client()
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        yield client
 
-def test_home_endpoint(client):
+def test_home(client):
     response = client.get('/')
     assert response.status_code == 200
     assert response.json == {'message': 'Welcome to Web-Application-Automation API!'}
 
-def test_health_endpoint(client):
+def test_health(client):
     response = client.get('/health')
     assert response.status_code == 200
     assert response.json == {'status': 'healthy'}
 
-def test_add_todo(client):
-    response = client.post('/todo', json={'task': 'Buy groceries'})
-    assert response.status_code == 201
+def test_todo_post(client):
+    response = client.post('/todo', json={'task': 'Test task'})
+    assert response.status_code == 200
     assert response.json['message'] == 'Todo added'
-    assert response.json['todo']['task'] == 'Buy groceries'
+    assert response.json['todo']['task'] == 'Test task'
 
-def test_get_todos(client):
-    client.post('/todo', json={'task': 'Buy groceries'})
+def test_todo_post_invalid(client):
+    response = client.post('/todo', json={})
+    assert response.status_code == 400
+    assert response.json['error'] == 'Task is required'
+
+def test_todo_get(client):
+    client.post('/todo', json={'task': 'Test task'})
     response = client.get('/todo')
     assert response.status_code == 200
     assert len(response.json['todos']) > 0
 
-def test_update_todo(client):
-    client.post('/todo', json={'task': 'Buy groceries'})
+def test_todo_update(client):
+    client.post('/todo', json={'task': 'Test task'})
     response = client.put('/todo/1', json={'completed': True})
     assert response.status_code == 200
+    assert response.json['message'] == 'Todo updated'
     assert response.json['todo']['completed'] is True
